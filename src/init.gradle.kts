@@ -4,7 +4,7 @@ import java.nio.file.StandardCopyOption
 import io.craigmiller160.craigbuild.gradle.plugin.CraigBuildGradlePlugin
 
 initscript {
-    val craigBuildGradlePluginVersion = "1.0.0-SNAPSHOT"
+    val craigBuildGradlePluginVersion = "1.0.0"
 
     repositories {
         mavenCentral()
