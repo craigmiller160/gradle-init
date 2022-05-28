@@ -4,12 +4,12 @@ import java.nio.file.StandardCopyOption
 
 allprojects {
     task("installDefaultGitHooks") {
-        val hooksDevDir = Paths.get(rootProject.rootDir.absolutePath, "hooks")
-        val hooksGitDir = Paths.get(rootProject.rootDir.absolutePath, ".git", "hooks")
+        val hooksSourceDir = Paths.get(System.getProperty("user.home"), ".gradle", "gitHooks")
+        val hooksTargetDir = Paths.get(rootProject.rootDir.absolutePath, ".git", "hooks")
         runCatching {
-            Files.list(hooksDevDir)
+            Files.list(hooksSourceDir)
                 .forEach { hookPath ->
-                    val hookGitPath = hooksGitDir.resolve(hookPath.fileName)
+                    val hookGitPath = hooksTargetDir.resolve(hookPath.fileName)
                     Files.copy(hookPath, hookGitPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES)
                 }
         }
