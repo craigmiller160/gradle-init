@@ -22,6 +22,16 @@ initscript {
 }
 
 allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url = uri("https://repo.gradle.org/gradle/libs-releases")
+        }
+        maven {
+            url = uri("https://nexus-craigmiller160.ddns.net/repository/maven-public")
+        }
+    }
+
     tasks.register("installDefaultGitHooks") {
         val hooksSourceDir = Paths.get(System.getProperty("user.home"), ".gradle", "gitHooks")
         val hooksTargetDir = Paths.get(rootProject.rootDir.absolutePath, ".git", "hooks")
