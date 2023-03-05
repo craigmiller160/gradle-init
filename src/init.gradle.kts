@@ -31,6 +31,7 @@ allprojects {
     }
 
     tasks.register("installDefaultGitHooks") {
+        println("Installing Default Git Hooks")
         val hooksSourceDir = Paths.get(System.getProperty("user.home"), ".gradle", "gitHooks")
         val hooksTargetDir = Paths.get(rootProject.rootDir.absolutePath, ".git", "hooks")
         runCatching {
@@ -40,6 +41,7 @@ allprojects {
                     Files.copy(hookPath, hookGitPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES)
                 }
         }
+            .onFailure { it.printStackTrace() }
     }
 
     apply<CraigBuildGradlePlugin>()
