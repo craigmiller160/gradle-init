@@ -26,9 +26,6 @@ allprojects {
         mavenCentral()
         mavenLocal()
         maven {
-            url = uri("https://repo.gradle.org/gradle/libs-releases")
-        }
-        maven {
             url = uri("https://nexus-craigmiller160.ddns.net/repository/maven-public")
         }
     }
