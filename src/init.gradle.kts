@@ -47,8 +47,8 @@ allprojects {
     apply<CraigBuildGradlePlugin>()
 }
 
-settingsEvaluated { settings ->
-    settings.pluginManagement {
+settingsEvaluated {
+    pluginManagement {
         repositories {
             mavenLocal()
             mavenCentral()
