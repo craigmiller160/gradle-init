@@ -26,24 +26,22 @@ allprojects {
         mavenCentral()
         mavenLocal()
         maven {
-            url = uri("https://repo.gradle.org/gradle/libs-releases")
-        }
-        maven {
             url = uri("https://nexus-craigmiller160.ddns.net/repository/maven-public")
         }
     }
 
-    tasks.register("installDefaultGitHooks") {
-        val hooksSourceDir = Paths.get(System.getProperty("user.home"), ".gradle", "gitHooks")
-        val hooksTargetDir = Paths.get(rootProject.rootDir.absolutePath, ".git", "hooks")
-        runCatching {
-            Files.list(hooksSourceDir)
-                .forEach { hookPath ->
-                    val hookGitPath = hooksTargetDir.resolve(hookPath.fileName)
-                    Files.copy(hookPath, hookGitPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES)
-                }
+    apply<CraigBuildGradlePlugin>()
+}
+
+settingsEvaluated {
+    pluginManagement {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+            gradlePluginPortal()
+            maven {
+                url = uri("https://nexus-craigmiller160.ddns.net/repository/maven-public")
+            }
         }
     }
-
-    apply<CraigBuildGradlePlugin>()
 }
